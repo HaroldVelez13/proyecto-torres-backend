@@ -1,0 +1,80 @@
+<?php 
+namespace App\Helpers;
+use Illuminate\Http\File;
+
+/**
+ CLass for CRUD image 
+*/
+class ImageHelper 
+{
+	private $path;
+	private $image_url;
+	private $image_name;
+	private $image_url_new;
+	private $image_url_old;
+
+	public function __construct($path, $image_url=null,  $img_url_new=null , $img_url_old=null)
+	{
+		$this->image_name = 'default.png';		
+		$this->image_url = $image_url;
+		$this->path =  public_path('/images/proyecto_torres/').$path.'/';
+		$this->image_url_new = $img_url_new;
+		$this->image_url_old = $img_url_old;
+	}
+
+	/**
+     * Save image in storage
+     * @return $this->image_name;
+    */
+    public function saveImage()
+    {
+        if (!$this->image_url) {            
+        
+            $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $this->image_url));
+            //grab a new tmp file
+            $tmpFilePath=sys_get_temp_dir().'/'.uniqid(); 
+            //write the image to it
+            file_put_contents($tmpFilePath, $image_data);
+            $f = finfo_open();
+            $mime_type = finfo_buffer($f, $image_data, FILEINFO_MIME_TYPE);
+            $this->image_name = time().'.'.str_replace("image/","",$mime_type);
+            $tmpFile = new File($tmpFilePath);
+            $tmpFile->move($this->path, $this->image_name); 
+        }       
+
+        return $this->image_name;
+    }
+
+    /**
+     * Remove the specified image from storage.
+     *
+     *@return $this->image_name;
+    */
+    public function deleteImage(){
+
+        if ($this->image_url != 'default.png') {
+            $imagedelete = $this->path.$this->image_url;
+            unlink($imagedelete);
+        }
+
+        return true;
+    }
+
+    /**
+     * Update the specified image from storage.
+     *
+     * @return $this->image_name;
+    */
+    public function updateImage(){
+
+        if ($this->image_url_new && $this->image_url_old) {
+        	$this->image_url = $this->image_url_old;
+            $this->deleteImage();
+            $this->image_url = $this->image_url_new;
+            $this->image_name =$this->saveImage();            
+        }
+
+        return $this->image_name;
+    }
+
+}
