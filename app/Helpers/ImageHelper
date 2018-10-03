@@ -28,7 +28,8 @@ class ImageHelper
     */
     public function saveImage()
     {
-        if (!$this->image_url) {            
+
+        if ($this->image_url) {            
         
             $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $this->image_url));
             //grab a new tmp file
