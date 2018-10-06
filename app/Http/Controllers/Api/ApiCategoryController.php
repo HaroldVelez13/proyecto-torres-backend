@@ -47,9 +47,9 @@ class ApiCategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        $category = Category::findOrfail($category);
+        $category = Category::findOrfail($id);
         return compat('category');
     }
 
@@ -62,8 +62,7 @@ class ApiCategoryController extends Controller
      */
     public function update(CategoryUpdate $CategoryRequest, $id)
     {
-        $category = Category::findOrfail($id);
-        $category = new Category();
+        $category = Category::findOrfail($id);     
 
         $category->name         = $categoryRequest->name;
         $category->material     = $categoryRequest->material;
@@ -81,9 +80,9 @@ class ApiCategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        $category = Category::findOrfail($category);
+        $category = Category::findOrfail($id);
         $category->delete();
         return $this->index();
     }

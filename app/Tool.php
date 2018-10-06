@@ -19,7 +19,7 @@ class Tool extends Model
 	protected $dates = ['deleted_at'];
     
 	
-    public $timestamps = false;
+    public $timestamps = true;
     
     protected $table = 'tools';
 
