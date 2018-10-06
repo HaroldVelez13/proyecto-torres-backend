@@ -22,7 +22,7 @@ class Categories extends Migration
 
         $table->increments('id');
         
-        $table->String('name');
+        $table->String('name')->unique();
         
         $table->String('material')->nullable();
         

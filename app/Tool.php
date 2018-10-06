@@ -24,9 +24,9 @@ class Tool extends Model
     protected $table = 'tools';
 
 	
-	public function tool_category()
+	public function category()
 	{
-		return $this->belongsTo('App\Tool_category','tool_category_id');
+		return $this->belongsTo('App\category','category_id');
 	}
 
 	

@@ -59,5 +59,15 @@ Route::group(['middleware' => ['auth:api']], function (){
 
 	});
 
+		//Category Routes
+		Route::prefix('categories')->group(function(){
+			Route::get('/',				'Api\ApiCategoryController@index');
+			Route::get('/{id}',			'Api\ApiCategoryController@show');	  
+			Route::post('/create',		'Api\ApiCategoryController@create');	  
+			Route::put('/{id}/update',	'Api\ApiCategoryController@update');
+			Route::delete('/{id}/delete',	'Api\ApiCategoryController@destroy');
+	
+		});
+
 });
 
