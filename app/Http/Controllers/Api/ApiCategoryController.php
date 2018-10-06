@@ -38,7 +38,7 @@ class ApiCategoryController extends Controller
         $category->min_stock    = $categoryRequest->min_stock;
 
         $category->save();
-        return compat('category');
+        return $this->index();
     }
 
     /**
@@ -70,7 +70,7 @@ class ApiCategoryController extends Controller
         $category->min_stock    = $categoryRequest->min_stock;
 
         $category->save();
-        return compat('category');
+        return $this->index();
 
     }
 

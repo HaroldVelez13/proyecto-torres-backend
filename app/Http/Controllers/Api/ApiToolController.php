@@ -41,7 +41,7 @@ class ApiToolController extends Controller
        $tool->category_id   = $toolRequest->category_id;
        $tool->save();
 
-       return compat('tools');
+       return $this->index();
 
     }
 
@@ -74,7 +74,7 @@ class ApiToolController extends Controller
         $tool->type          = $toolRequest->type;
         $tool->category_id   = $toolRequest->category_id;
         $tool->save();
-        return compact('tool');
+        return $this->index();
     }
 
     /**
