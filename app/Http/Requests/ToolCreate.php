@@ -25,6 +25,7 @@ class ToolCreate extends FormRequest
     {
         return [
             'barcode'       => 'required|integer|unique:tools',
+            'name'          => 'nullable|string|max:255',
             'total'         => 'nullable|integer',
             'state'         => 'required|string|max:255',
             'type'          => 'required|string|max:255',

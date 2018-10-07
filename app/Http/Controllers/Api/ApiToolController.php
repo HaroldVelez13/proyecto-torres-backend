@@ -36,6 +36,7 @@ class ApiToolController extends Controller
     {
        $tool = new Tool;
        $tool->barcode       = $toolRequest->barcode;
+       $tool->name          = $toolRequest->name;
        $tool->state         = $toolRequest->state;
        $tool->type          = $toolRequest->type;
        $tool->category_id   = $toolRequest->category_id;
@@ -71,6 +72,7 @@ class ApiToolController extends Controller
 
         $tool->barcode       = $toolRequest->barcode;
         $tool->state         = $toolRequest->state;
+        $tool->name          = $toolRequest->name;
         $tool->type          = $toolRequest->type;
         $tool->category_id   = $toolRequest->category_id;
         $tool->save();
