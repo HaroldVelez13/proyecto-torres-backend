@@ -31,7 +31,7 @@ class ApiCategoryController extends Controller
      */
     public function create(CategoryCreate $categoryRequest)
     {
-        $category = new Category();
+        $category               = new Category();
         $category->name         = $categoryRequest->name;
         $category->material     = $categoryRequest->material;
         $category->description  = $categoryRequest->description;

@@ -24,7 +24,7 @@ class Category extends Model
     */
     public function tools()
     {
-        return $this->belongsToMany('App\Tool');
+        return $this->hasMany('App\Tool');
     }
 
 	
