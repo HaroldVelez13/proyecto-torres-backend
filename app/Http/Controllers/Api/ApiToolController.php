@@ -24,7 +24,7 @@ class ApiToolController extends Controller
             $tool->category = $category_name;
 
         }
-        return compat('tools');
+        return compact('tools');
     }
 
     /**
@@ -56,7 +56,7 @@ class ApiToolController extends Controller
     public function show($id)
     {
         $tool = Tool::findOrfail($id);
-        return compat('tool');
+        return compact('tool');
     }
     /**
      * Update the specified resource in storage.

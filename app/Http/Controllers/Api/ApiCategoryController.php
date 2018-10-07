@@ -50,7 +50,7 @@ class ApiCategoryController extends Controller
     public function show($id)
     {
         $category = Category::findOrfail($id);
-        return compat('category');
+        return compact('category');
     }
 
     /**
