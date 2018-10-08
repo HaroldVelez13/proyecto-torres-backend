@@ -18,15 +18,16 @@ class Tool extends Model
 
 	protected $dates = ['deleted_at'];
     
-	
-    public $timestamps = true;
+	protected $hidden = ['deleted_at'];
+
+    public $timestamps = false;
     
     protected $table = 'tools';
 
 	
 	public function category()
 	{
-		return $this->belongsTo('App\category','category_id');
+		return $this->belongsTo('App\Category');
 	}
 
 }

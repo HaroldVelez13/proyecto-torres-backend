@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth:api']], function (){
 	Route::prefix('tools')->group(function(){
 		Route::get('/',								'Api\ApiToolController@index');
 		Route::get('/{id}',						'Api\ApiToolController@show');	  
+		Route::get('getForCategory/{id}',	'Api\ApiToolController@index');	  
 		Route::post('/create',				'Api\ApiToolController@create');	  
 		Route::put('/{id}/update',		'Api\ApiToolController@update');
 		Route::delete('/{id}/delete',	'Api\ApiToolController@delete');

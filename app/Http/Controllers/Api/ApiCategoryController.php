@@ -19,7 +19,9 @@ class ApiCategoryController extends Controller
     {
         $categories = Category::all();        
         foreach($categories as $category){
-            $category->tools->count();
+            
+            $tools = $category->tools->count();
+            $category->tools_coutn=$tools;
         }        
         return compact('categories');
     }
@@ -60,7 +62,7 @@ class ApiCategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryUpdate $CategoryRequest, $id)
+    public function update(CategoryUpdate $categoryRequest, $id)
     {
         $category = Category::findOrfail($id);     
 

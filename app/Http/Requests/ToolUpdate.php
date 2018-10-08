@@ -28,7 +28,7 @@ class ToolUpdate extends FormRequest
             'total'         => 'nullable|integer',
             'state'         => 'required|string|max:255',
             'type'          => 'required|string|max:255',
-            'category_id'   => 'required|integer',
+            'category'      => 'required|integer',
         ];
     }
 }

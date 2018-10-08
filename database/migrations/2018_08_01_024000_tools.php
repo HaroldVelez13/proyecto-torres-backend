@@ -23,7 +23,7 @@ class Tools extends Migration
         $table->increments('id');        
         $table->String('barcode')->unique();
         $table->String('name');
-        $table->integer('total');
+        $table->integer('total')->default(0);
         
         $table->enum('state', ['activo', 'inactivo'])->default('activo');
         $table->enum('type', ['herramienta', 'insumo']);

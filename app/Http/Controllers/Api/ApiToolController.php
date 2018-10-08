@@ -15,18 +15,24 @@ class ApiToolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id=null)
     {
-        $tools = Tool::all();
+        if($id){
+            $tools = Tool::where('category_id', $id)->get();
+        }
+        if($id==null){
+            $tools = Tool::all();
+        }
+        
+        $index=1;
         foreach ($tools as $tool) {
-            $category       = $tool->category;
-            $category_name  = $category->name;
-            $tool->category = $category_name;
+            $tool->index = $index; 
+            $tool->category = $tool->category;           
+            $index++;
 
         }
         return compact('tools');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -35,14 +41,19 @@ class ApiToolController extends Controller
     public function create(ToolCreate $toolRequest)
     {
        $tool = new Tool;
+       if (!$toolRequest->barcode || $toolRequest->barcode=="") {
+        $toolRequest->barcode = time();
+       }
        $tool->barcode       = $toolRequest->barcode;
        $tool->name          = $toolRequest->name;
        $tool->state         = $toolRequest->state;
        $tool->type          = $toolRequest->type;
-       $tool->category_id   = $toolRequest->category_id;
+       $tool->category_id   = $toolRequest->category;
        $tool->save();
 
-       return $this->index();
+       $category = $tool->category;
+       $id = $category->id;       
+       return $this->index($id);
 
     }
 
@@ -70,13 +81,17 @@ class ApiToolController extends Controller
         //
         $tool = Tool::findOrfail($id);
 
+        $category = $tool->category;
+        $id = $category->id;
+
         $tool->barcode       = $toolRequest->barcode;
         $tool->state         = $toolRequest->state;
         $tool->name          = $toolRequest->name;
         $tool->type          = $toolRequest->type;
-        $tool->category_id   = $toolRequest->category_id;
+        $tool->category_id   = $toolRequest->category;
         $tool->save();
-        return $this->index();
+              
+        return $this->index($id);
     }
 
     /**
@@ -88,8 +103,11 @@ class ApiToolController extends Controller
     public function delete($id)
     {
         $tool = Tool::findOrfail($id);
-        $tool->delete();
-        return $this->index();
+        $category = $tool->category;
+        $id = $category->id;
+        $tool->delete();               
+        return $this->index($id);
+        
     }
 
         /**
@@ -101,7 +119,9 @@ class ApiToolController extends Controller
     public function destroy($id)
     {
         $tool = Tool::findOrfail($id);
+        $category = $tool->category;
+        $id = $category->id;
         $tool->forceDelete();
-        return $this->index();
+        return $this->index($id);
     }
 }
