@@ -21,8 +21,9 @@ class Tools extends Migration
         Schema::create('tools',function (Blueprint $table){
 
         $table->increments('id');        
-        $table->String('barcode');
-        $table->integer('total');
+        $table->String('barcode')->unique();
+        $table->String('name');
+        $table->integer('total')->default(0);
         
         $table->enum('state', ['activo', 'inactivo'])->default('activo');
         $table->enum('type', ['herramienta', 'insumo']);
