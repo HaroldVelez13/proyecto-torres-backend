@@ -70,7 +70,7 @@ class ApiCheckin extends Controller
         return $this->index();
     }
     /**
-     * Update the specified resource in storage.
+     * add the specified resource in tool.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  Tool  $request
@@ -83,8 +83,8 @@ class ApiCheckin extends Controller
 
         $checkin->tools->attach($request->id , ['total' => $request->total]);
         $tool = Tool::findOrfail($request->id);
-        $catidad_actual = $tool->catidad;
-        $tool->catidad = $catidad_actual+$request->catidad;
+        $catidad_actual = $tool->cantidad;
+        $tool->cantidad = $cantidad_actual+$request->cantidad;
         $tool->save(); 
 
         $toolsCheckin = $checkin->tools();
@@ -92,7 +92,7 @@ class ApiCheckin extends Controller
 
     }
         /**
-     * Update the specified resource in storage.
+     * least the specified resource in tool.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  Tool  $request
@@ -103,9 +103,9 @@ class ApiCheckin extends Controller
         
         $checkin = Checkin::findOrfail($id);
         $tool = Tool::findOrfail($request->id);
-        $catidad_actual = $tool->catidad;
-        $tool->catidad = $catidad_actual-$request->catidad;
-        if($tool->catidad>=0)
+        $cantidad_actual = $tool->cantidad;
+        $tool->cantidad = $cantidad_actual-$request->cantidad;
+        if($tool->cantidad>=0)
         {   $checkin->tools->attach($request->id , ['total' => $request->total]);
             $tool->save();
             $toolsCheckin = $checkin->tools();
