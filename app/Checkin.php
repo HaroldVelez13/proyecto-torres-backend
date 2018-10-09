@@ -19,5 +19,12 @@ class Checkin extends Model
     
     protected $table = 'checkins';
 
+    /* The tools that belong to the checkin.
+    */
+    public function tools()
+    {
+        return $this->belongsToMany('App\Tool');
+    }
+
 	
 }
