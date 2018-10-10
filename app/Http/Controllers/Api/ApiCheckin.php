@@ -49,7 +49,8 @@ class ApiCheckin extends Controller
     public function show($id)
     {
         $checkin = Checkin::findOrfail($id);
-        return compact('checkin');
+        $tools   = $checkin->tools;
+        return compact('checkin', 'tools');
     }
 
     /**
@@ -81,8 +82,8 @@ class ApiCheckin extends Controller
         
         $checkin = Checkin::findOrfail($id);
 
-        $checkin->tools->attach($request->id , ['total' => $request->total]);
-        $tool = Tool::findOrfail($request->id);
+        $checkin->tools->attach($request->request->tool_id , ['total' => $request->tool_quantity]);
+        $tool = Tool::findOrfail($request->request->tool_id);
         $catidad_actual = $tool->cantidad;
         $tool->cantidad = $cantidad_actual+$request->cantidad;
         $tool->save(); 
@@ -102,11 +103,11 @@ class ApiCheckin extends Controller
     public function leastTool(Request $request, $id){
         
         $checkin = Checkin::findOrfail($id);
-        $tool = Tool::findOrfail($request->id);
-        $cantidad_actual = $tool->cantidad;
-        $tool->cantidad = $cantidad_actual-$request->cantidad;
+        $tool = Tool::findOrfail($request->tool_id);
+        $cantidad_actual = $tool->tool_quantity;
+        $tool->cantidad = $cantidad_actual-$request->tool_quantity;
         if($tool->cantidad>=0)
-        {   $checkin->tools->attach($request->id , ['total' => $request->total]);
+        {   $checkin->tools->attach($request->id , ['total' => $request->tool_quantity]);
             $tool->save();
             $toolsCheckin = $checkin->tools();
             return compact('toolsCheckin');
