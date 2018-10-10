@@ -13,7 +13,7 @@ class CheckinTool extends Migration
      */
     public function up()
     {
-        Schema::create('checkin_toll',function (Blueprint $table){
+        Schema::create('checkin_tool',function (Blueprint $table){
 
                 
         /**
@@ -41,7 +41,7 @@ class CheckinTool extends Migration
      */
     public function down()
     {
-        Schema::drop('checkin_toll');
+        Schema::drop('checkin_tool');
        
     }
 }
