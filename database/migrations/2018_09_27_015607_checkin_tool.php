@@ -13,12 +13,13 @@ class CheckinTool extends Migration
      */
     public function up()
     {
-        Schema::create('checkin_toll',function (Blueprint $table){
+        Schema::create('checkin_tool',function (Blueprint $table){
 
                 
         /**
          * Foreignkeys section
          */
+        $table->integer('tool_total');
         $table->integer('checkin_id')->unsigned()->nullable();
         $table->foreign('checkin_id')->references('id')->on('checkins')->onDelete('cascade');
         
@@ -41,7 +42,7 @@ class CheckinTool extends Migration
      */
     public function down()
     {
-        Schema::drop('checkin_toll');
+        Schema::drop('checkin_tool');
        
     }
 }

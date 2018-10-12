@@ -30,4 +30,11 @@ class Tool extends Model
 		return $this->belongsTo('App\Category');
 	}
 
+	/* The checkins that belong to the tool.
+    */
+    public function checkins()
+    {
+        return $this->belongsToMany('App\Checkin');
+    }
+
 }
