@@ -23,7 +23,7 @@ class Checkin extends Model
     */
     public function tools()
     {
-        return $this->belongsToMany('App\Tool');
+        return $this->belongsToMany('App\Tool')->withPivot(['tool_total']);
     }
 
 	

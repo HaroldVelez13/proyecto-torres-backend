@@ -19,6 +19,7 @@ class CheckinTool extends Migration
         /**
          * Foreignkeys section
          */
+        $table->integer('tool_total');
         $table->integer('checkin_id')->unsigned()->nullable();
         $table->foreign('checkin_id')->references('id')->on('checkins')->onDelete('cascade');
         
